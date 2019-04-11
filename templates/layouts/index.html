@@ -1,0 +1,16 @@
+{% extends "layouts/base.html" %}
+{% block title %}{{title}}{% endblock %}
+{% block head %}
+  {{ super() }}
+{% endblock %}
+{% block content %}
+<div class="row text-center">
+  <h1>{{ title}}</h1>
+  <canvas id="inputCanvas" width="200" height="200"></canvas>
+</div>
+<br/><br/>
+<div class="row text-center">
+  <button class="btn btn-primary" id="clearButton">Clear</button>
+  <button class="btn btn-primary" id="sendButton">Send data</button>
+</div>
+{% endblock %}

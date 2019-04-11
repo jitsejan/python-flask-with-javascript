@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+  <head>
+    {% block head %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="/static/js/script.js"></script>
+    <title>{% block title %}{% endblock %} - Simple Flask app</title>
+    {% endblock %}
+  </head>
+  <body>
+    <div class="container">
+        <nav class="navbar navbar-default" role="navigation">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>    
+          </div>
+          <a class="navbar-brand" href="#"></a>
+          <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="/">Home</a></li>
+              <li><a href="/results">Results</a></li>
+            </ul>
+          </div>
+        </nav>
+    </div>
+    <div id="content" class="container main-container">
+    {% block content %}{% endblock %}</div>
+    <div id="footer" class="container text-center">
+      {% block footer %}
+      &copy; Copyright 2017-2019 by Jitse-Jan.
+      {% endblock %}
+    </div>
+    <footer>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,9 @@
+.btn{
+    background-color: rgb(102,153,255);
+}
+#inputCanvas{
+    border: 2px solid rgb(102,153,255);
+}
+#footer{
+    margin-top: 100px;
+}
