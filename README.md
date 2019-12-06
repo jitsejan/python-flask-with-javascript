@@ -15,9 +15,9 @@ python-flask-with-javascript $ pipenv run flask run
 
 Open http://127.0.0.1:5000/, draw a character, click on Send and watch your terminal!
 
-![image-20191206022811472](images/in.png)
+![image-20191206022811472](images/in.png){ width=200 }
 
-![image-20191206022811472](images/out.png)
+![image-20191206022811472](images/out.png){ width=200 }
 
 
 
