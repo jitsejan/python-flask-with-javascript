@@ -19,8 +19,6 @@ Open http://127.0.0.1:5000/, draw a character, click on Send and watch your term
 
 <img src="images/out.png" alt="image-20191206022811472" style="zoom:33%;" />
 
-
-
 ### Introduction
 
 In this project I am experimenting with sending data between Javascript and Python using the web framework Flask. Additionally I will use matplotlib to generate a dynamic graph based on the provided user input data.
