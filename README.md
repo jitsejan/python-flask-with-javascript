@@ -33,14 +33,14 @@ In this project I am experimenting with sending data between Javascript and Pyth
 
 ### Important bits
 
-Send the `outputData` from Javascript to Python with a POST call to postmethod and use the form variable canvas_data. The POST call give a response from Python and the page is redirected to the results page with the given uuid.
+Send the `outputData` from Javascript to Python with a POST call to postmethod and use the form variable canvas_data. The POST call give a response from Python and the page is redirected to the results page with the given unique ID.
 
 ```javascript
 ...
 $.post( "/postmethod", {
   canvas_data: JSON.stringify(outputData)
 }, function(err, req, resp){
-  window.location.href = "/results/"+resp["responseJSON"]["uuid"];  
+  window.location.href = "/results/"+resp["responseJSON"]["unique_id"];  
 });
 ...
 ```
@@ -49,11 +49,11 @@ Retrieve the `canvas_data` from the POST request and write the content to a file
 
 ```python
 ...
-@app.route('/postmethod', methods = ['POST'])
+@app.route('/postmethod', methods=['POST'])
 def post_javascript_data():
     jsdata = request.form['canvas_data']
     unique_id = create_csv(jsdata)
-    params = { 'uuid' : unique_id }
+    params = {'unique_id': unique_id }
     return jsonify(params)
 ...
 ```
@@ -87,10 +87,10 @@ def index():
     return render_template('layouts/index.html',
                            title=title)
 
-@app.route('/results/<uuid>', methods=['GET'])
-def results(uuid):
+@app.route('/results/<unique_id>', methods=['GET'])
+def results(unique_id):
     title = 'Result'
-    data = get_file_content(uuid)
+    data = get_file_content(unique_id)
     return render_template('layouts/results.html',
                            title=title,
                            data=data)
@@ -99,7 +99,7 @@ def results(uuid):
 def post_javascript_data():
     jsdata = request.form['canvas_data']
     unique_id = create_csv(jsdata)
-    params = { 'uuid' : unique_id }
+    params = { 'unique_id' : unique_id }
     return jsonify(params)
 
 @app.route('/plot/<imgdata>')
@@ -123,8 +123,8 @@ def create_csv(text):
         file.write(text[1:-1]+"\n")
     return unique_id
 
-def get_file_content(uuid):
-    with open('images/'+uuid+'.csv', 'r') as file:
+def get_file_content(unique_id):
+    with open('images/'+unique_id+'.csv', 'r') as file:
         return file.read()
 
 if __name__ == '__main__':
@@ -199,7 +199,7 @@ $( document ).ready(function() {
     $.post( "/postmethod", {
       canvas_data: JSON.stringify(outputData)
     }, function(err, req, resp){
-      window.location.href = "/results/"+resp["responseJSON"]["uuid"];  
+      window.location.href = "/results/"+resp["responseJSON"]["unique_id"];  
     });
   }
   

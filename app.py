@@ -1,3 +1,4 @@
+import glob
 import io
 import os
 import uuid
@@ -9,28 +10,37 @@ from matplotlib.figure import Figure
 
 app = Flask(__name__)
 app.secret_key = "s3cr3t"
-app.debug = True
+app.debug = False
 app._static_folder = os.path.abspath("templates/static/")
 
 
 @app.route("/", methods=["GET"])
 def index():
-    title = "Create the input"
+    title = "Create the input image"
     return render_template("layouts/index.html", title=title)
 
 
-@app.route("/results/<uuid>", methods=["GET"])
-def results(uuid):
+@app.route("/results/", methods=["GET"])
+def results():
+    title = "Results"
+    datalist = []
+    for csv in glob.iglob("images/*.csv"):
+        datalist.append(get_file_content(csv))
+    return render_template("layouts/results.html", title=title, datalist=datalist)
+
+
+@app.route("/results/<unique_id>", methods=["GET"])
+def result_for_uuid(unique_id):
     title = "Result"
-    data = get_file_content(uuid)
-    return render_template("layouts/results.html", title=title, data=data)
+    data = get_file_content(get_file_name(unique_id))
+    return render_template("layouts/result.html", title=title, data=data)
 
 
 @app.route("/postmethod", methods=["POST"])
 def post_javascript_data():
     jsdata = request.form["canvas_data"]
     unique_id = create_csv(jsdata)
-    params = {"uuid": unique_id}
+    params = {"unique_id": unique_id}
     return jsonify(params)
 
 
@@ -52,13 +62,17 @@ def plot(imgdata):
 
 def create_csv(text):
     unique_id = str(uuid.uuid4())
-    with open("images/" + unique_id + ".csv", "a") as file:
+    with open(get_file_name(unique_id), "a") as file:
         file.write(text[1:-1] + "\n")
     return unique_id
 
 
-def get_file_content(uuid):
-    with open("images/" + uuid + ".csv", "r") as file:
+def get_file_name(unique_id):
+    return f"images/{unique_id}.csv"
+
+
+def get_file_content(filename):
+    with open(filename, "r") as file:
         return file.read()
 
 
