@@ -1,6 +1,10 @@
 .btn{
     background-color: rgb(102,153,255);
 }
+img.results-img{
+    float: left;
+    height: 100px;
+}
 #inputCanvas{
     border: 2px solid rgb(102,153,255);
 }
