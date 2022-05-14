@@ -5,16 +5,12 @@
 {% endblock %}
 {% block content %}
 <div class="row text-center">
-  <h1>{{ title}}</h1>
-  <canvas id="inputCanvas" width="200" height="200"></canvas>
-    <br/>
+    <h1>{{ title }}</h1>
     <label for="ticker" >Ticker</label>
     <input id="ticker" type="text">
 </div>
 <br/><br/>
 <div class="row text-center">
-    <button class="btn btn-primary" id="tickerButton">Stonks</button>
-    <button class="btn btn-primary" id="clearButton">Clear</button>
-    <button class="btn btn-primary" id="sendButton">Send data</button>
+    <button class="btn btn-primary" id="tickerButton">Get Price Data</button>
 </div>
 {% endblock %}
